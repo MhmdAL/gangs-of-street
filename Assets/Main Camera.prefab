@@ -1,0 +1,328 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2892662953389810732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2892662953389810731}
+  - component: {fileID: 2892662953389810730}
+  - component: {fileID: 2892662953389810735}
+  - component: {fileID: 2892662953389810733}
+  - component: {fileID: 2892662953389810734}
+  - component: {fileID: 2892662953389810725}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2892662953389810731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892662953389810732}
+  m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
+  m_LocalPosition: {x: 0, y: 12.12, z: -0.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &2892662953389810730
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892662953389810732}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.1764706, g: 0.48235294, b: 0.6313726, a: 0.019607844}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &2892662953389810735
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892662953389810732}
+  m_Enabled: 1
+--- !u!114 &2892662953389810733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892662953389810732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec3e4ed2a559374298a103953472518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraAxes: 1
+  perspectiveZoomMode: 1
+  camZoomMin: 5
+  camZoomMax: 40
+  camOverzoomMargin: 2
+  camOverdragMargin: 5
+  boundaryMin: {x: -50, y: -50}
+  boundaryMax: {x: 50, y: 50}
+  camFollowFactor: 15
+  autoScrollDampMode: 0
+  autoScrollDamp: 300
+  autoScrollDampCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7
+      value: 0.9
+      inSlope: -0.5
+      outSlope: -0.5
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.01
+      inSlope: -0.85
+      outSlope: -0.85
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  groundLevelOffset: 0
+  enableRotation: 0
+  enableTilt: 0
+  tiltAngleMin: 45
+  tiltAngleMax: 90
+  enableZoomTilt: 0
+  zoomTiltAngleMin: 45
+  zoomTiltAngleMax: 90
+  OnPickItem:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickItem2D:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickItem2D
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickItemDoubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPickItem2DDoubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  keyboardAndMousePlatforms: 07000000020000000000000001000000100000000d00000011000000
+  controlTweakablesEnabled: 0
+  keyboardControlsModifiers: 34010000330100003201000031010000
+  mouseRotationFactor: 0.01
+  mouseTiltFactor: 0.005
+  mouseZoomFactor: 1
+  keyboardRotationFactor: 1
+  keyboardTiltFactor: 1
+  keyboardZoomFactor: 1
+  keyboardRepeatFactor: 60
+  keyboardRepeatDelay: 0.5
+  expertModeEnabled: 0
+  zoomBackSpringFactor: 20
+  dragBackSpringFactor: 10
+  autoScrollVelocityMax: 60
+  dampFactorTimeMultiplier: 2
+  isPinchModeExclusive: 1
+  customZoomSensitivity: 1
+  terrainCollider: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  is2dOverdragMarginEnabled: 0
+  camOverdragMargin2d: {x: 5, y: 5}
+  rotationDetectionDeltaThreshold: 0.25
+  rotationMinPinchDistance: 0.125
+  rotationLockThreshold: 2.5
+  pinchModeDetectionMoveTreshold: 0.025
+  pinchTiltModeThreshold: 0.0075
+  pinchTiltSpeed: 180
+--- !u!114 &2892662953389810734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892662953389810732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b68db338cb9e141b86129564ccfbf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expertModeEnabled: 0
+  clickDurationThreshold: 0.7
+  doubleclickDurationThreshold: 0.5
+  tiltMoveDotTreshold: 0.7
+  tiltHorizontalDotThreshold: 0.5
+  dragStartDistanceThresholdRelative: 0.05
+  longTapStartsDrag: 1
+--- !u!114 &2892662953389810725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892662953389810732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22d13ae4d0d2dd44b093e4fb04097a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapToGrid: 1
+  snapUnitSize: 1
+  snapOffset: {x: 0, y: 0}
+  snapAngle: 1
+  isMultiSelectionEnabled: 0
+  requireLongTapForMove: 0
+  OnPickableTransformSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickableTransformSelected
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickableTransformSelectedExtended:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPickableTransformDeselected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickableTransformDeselected
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickableTransformMoveStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickableTransformMoveStarted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickableTransformMoved:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickableTransformMoved
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickableTransformMoveEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPickableTransformMoveEnded
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  expertModeEnabled: 0
+  deselectPreviousColliderOnClick: 1
+  repeatEventSelectedOnClick: 1
+  useLegacyTransformMovedEventOrder: 0
