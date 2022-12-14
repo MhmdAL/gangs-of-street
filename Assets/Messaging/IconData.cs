@@ -1,85 +1,150 @@
 
 using RTLTMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class IconData : MonoBehaviour
 {
-    [SerializeField] int id;
-    [SerializeField] string arabicName;
-    [SerializeField] public string englishName;
-    [SerializeField] string turkishName;
-    [SerializeField] Sprite labelimage;
-    [SerializeField] SpriteRenderer LablePlace; 
-    [SerializeField] RTLTextMeshPro nameText;
+    [Header("Data")]
+    [SerializeField] private int id;
+    [SerializeField] private bool hasCooldown;
+    [SerializeField] private Sprite labelimage;
+    
+    [SerializeField] private string arabicName;
+    [SerializeField] private string englishName;
+    [SerializeField] private string turkishName;
+    [SerializeField] private string arabicAvailableString;
+    [SerializeField] private string englishAvailableString;
+    [SerializeField] private string turkishAvailableString;
+    
+    [SerializeField] private Color onCooldownColor = Color.red;
+    [SerializeField] private Color availableColor = Color.green;
+
+    [Header("Refs")]
+    [SerializeField] private RTLTextMeshPro nameText;
+    [SerializeField] private RTLTextMeshPro timeText; 
+    
+    [SerializeField] private Image timerOutlineImage; 
+
+    [SerializeField] private SpriteRenderer LablePlace; 
+    
     [HideInInspector] public IconManager iconManager;
-    string nameInUse;
 
-    //new code
-    float timeRemaining = 10;
-    public bool timerIsRunning = false;
-    public RTLTextMeshPro timeText; 
-    float timeRemainingDefault;
+    private Language _currentLanguage = Language.ar;
 
-    public void SetTime(float val) //Updated
+    private float _maxTime;
+    private float _timeRemaining = 10;
+    private bool _timerIsRunning = false;
+    
+    private void Start()
     {
-        timeRemainingDefault = val;
-        timeRemaining = val;
-        timerIsRunning = true;
+        LablePlace.sprite = labelimage;
+
+        UpdateCooldownDisplay();
     }
-
-    void Update()
+    
+    private void Update()
     {
-        if (timerIsRunning)
+        if (_timerIsRunning && hasCooldown)
         {
-            if (timeRemaining > 0)
+            if (_timeRemaining > 0)
             {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
+                _timeRemaining -= Time.deltaTime;
             }
             else
             {
                 Debug.Log("Time has run out!");
-                timeRemaining = timeRemainingDefault ;
-                timerIsRunning = false;
-                timeText.text = "";
+                
+                _timerIsRunning = false;
             }
+
+            UpdateCooldownDisplay();
         }
     }
-    void DisplayTime(float timeToDisplay)
-    {
-        timeToDisplay += 1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-    //end of new code
-
-    void Start()
-    {
-        LablePlace.sprite = labelimage;
-    }
+    
     private void OnMouseUpAsButton() //updated
     {
-       
-            iconManager.IconClicked(id.ToString());        
+        iconManager.IconClicked(id.ToString());
+    }
+    
+    public void SetCooldown(float val) //Updated
+    {
+        if (!hasCooldown)
+            return;
+
+        _maxTime = val;
+        _timeRemaining = val;
+        _timerIsRunning = true;
+    }
+    
+    public void SetLanguage(Language language)
+    {
+        _currentLanguage = language;
         
+        nameText.text = GetName();
+
+        UpdateCooldownDisplay();
     }
 
-    public void SetLanguage(Langugage language)
+    private void UpdateCooldownDisplay()
     {
-        if (language == Langugage.ar)
-            nameInUse = arabicName;
-        else if (language == Langugage.en)
-            nameInUse = englishName;
-        else if (language == Langugage.tr)
-            nameInUse = turkishName;
+        if (!hasCooldown)
+        {
+            timeText.gameObject.SetActive(false);
+            timerOutlineImage.transform.parent.gameObject.SetActive(false);
+            return;
+        }
+        
+        timeText.gameObject.SetActive(true);
 
+        if (_timerIsRunning)
+        {
+            timerOutlineImage.transform.parent.gameObject.SetActive(true);
 
-        nameText.text = nameInUse;
+            timeText.color = onCooldownColor;
 
+            timerOutlineImage.fillAmount = _timeRemaining / _maxTime;
+
+            var adjustedTime = _timeRemaining + 1;
+            float minutes = Mathf.FloorToInt(adjustedTime / 60);
+            float seconds = Mathf.FloorToInt(adjustedTime % 60);
+            timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        else
+        {
+            timerOutlineImage.transform.parent.gameObject.SetActive(false);
+
+            timeText.color = availableColor;
+            
+            timeText.text = GetAvailableText();
+        }
+    }
+
+    private string GetAvailableText()
+    {
+        if (_currentLanguage == Language.ar)
+            return arabicAvailableString;
+        else if (_currentLanguage == Language.en)
+            return englishAvailableString;
+        else if (_currentLanguage == Language.tr)
+            return turkishAvailableString;
+
+        return arabicAvailableString;
+    }
+    
+    private string GetName()
+    {
+        if (_currentLanguage == Language.ar)
+            return arabicName;
+        else if (_currentLanguage == Language.en)
+            return englishName;
+        else if (_currentLanguage == Language.tr)
+            return turkishName;
+
+        return arabicName;
     }
 }
-public enum Langugage
+public enum Language
 {
     ar, en, tr
 }

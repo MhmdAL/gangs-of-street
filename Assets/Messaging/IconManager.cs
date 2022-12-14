@@ -3,31 +3,50 @@ using System.Collections.Generic;
 using RTLTMPro;
 using UnityEngine;
 using System;
+
 public class IconManager : MonoBehaviour
 {
     IconData[] icons;
     [SerializeField] MessageManager messageManager;
+
     [SerializeField] PrizeBehaviour prizeBehaviour;
-    // Start is called before the first frame update
-    void Awake()
+
+    private void Awake()
     {
         icons = GetComponentsInChildren<IconData>();
         foreach (IconData icon in icons)
             icon.iconManager = this;
-        
     }
-    public void AssignLanguage(Langugage lang)
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var icons = FindObjectsOfType<IconData>();
+            foreach (var icon in icons)
+            {
+                icon.SetCooldown(10);
+            }
+
+            var iconManager = FindObjectOfType<IconManager>();
+            iconManager.AssignTowerPrize("-1");
+        }
+#endif
+    }
+
+    public void AssignLanguage(Language lang)
     {
         foreach (IconData icon in icons)
             icon.SetLanguage(lang);
     }
+
     public void AssignTimerPertiod(string mesg) //updated
     {
         string[] msgData = mesg.Split(',');
-        icons[Int32.Parse(msgData[0])].SetTime(float.Parse(msgData[1]));
-
-        
+        icons[Int32.Parse(msgData[0])].SetCooldown(float.Parse(msgData[1]));
     }
+
     public void IconClicked(string iconName)
     {
         messageManager.SendMessageForIcon(iconName);
@@ -35,10 +54,28 @@ public class IconManager : MonoBehaviour
 
     public void AssignTowerPrize(string prize)
     {
-        prizeBehaviour.AssignPrize(prize);
+        Debug.Log(prize + "sending to unity");
+
+        var timeTillNextPrize = int.Parse(prize);
+
+        if (timeTillNextPrize == -1)
+        {
+            prizeBehaviour.SetPrize();
+        }
+        else if (timeTillNextPrize == 0)
+        {
+            prizeBehaviour.HidePrizeAndTimer();
+        }
+        else
+        {
+            prizeBehaviour.SetCooldown(timeTillNextPrize);
+        }
     }
-    public void TowerClicked(string prize)
+
+    public void TowerClicked()
     {
-        messageManager.SendMessageForIcon(prize);
+        Debug.Log("prize" + "sending from unity");
+
+        messageManager.SendMessageForIcon("prize");
     }
 }

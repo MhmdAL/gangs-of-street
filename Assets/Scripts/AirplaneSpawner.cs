@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 using Random = UnityEngine.Random;
@@ -20,16 +17,6 @@ public class AirplaneSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            var icons = FindObjectsOfType<IconData>();
-            foreach (var icon in icons)
-            {
-                icon.SetLanguage(Langugage.ar);
-                icon.SetTime(5);
-            }
-        }
-        
         _spawnTimer += Time.deltaTime;
 
         if (_spawnTimer >= _currentSpawnInterval)

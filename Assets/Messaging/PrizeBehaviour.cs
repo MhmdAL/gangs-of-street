@@ -2,38 +2,78 @@ using System;
 using RTLTMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class PrizeBehaviour : MonoBehaviour
 {
-    [SerializeField] IconManager iconManager;
-    [SerializeField] Image icon;
-    [SerializeField] Sprite[] icons;
-    [SerializeField] RTLTextMeshPro PrizeTextOnTower;
-    string prize;
-    // Start is called before the first frame update
+    [SerializeField] private IconManager iconManager;
 
-    private void Awake()
+    [SerializeField] private Image prizeIconImage;
+    [SerializeField] private RTLTextMeshPro timerText;
+    
+    private bool _hasPrize;
+    private bool _isActive;
+    private float _timeTillNextPrize;
+    
+    private void Update()
     {
-        icon.gameObject.SetActive(false);
-        PrizeTextOnTower.text = "";
+        if (!_isActive || _hasPrize)
+            return;
+
+        _timeTillNextPrize -= Time.deltaTime;
+
+        if (_timeTillNextPrize <= 0)
+        {
+            SetPrize();
+        }
+        
+        UpdateCooldownDisplay();
     }
+
     private void OnMouseUpAsButton()
     {
-        Debug.Log(prize + "sending from unity");
-        iconManager.TowerClicked(prize);
-        icon.gameObject.SetActive(false);
-        PrizeTextOnTower.text = "";
+        if (!_isActive || !_hasPrize)
+            return;
+
+        iconManager.TowerClicked();
     }
-    public void AssignPrize(string prize)
+
+    private void UpdateCooldownDisplay()
     {
-        Debug.Log(prize + "sending to unity");
-        string[] prizes = prize.Split(',');
-        this.prize = prize;
-        PrizeTextOnTower.text = prizes[1];
-        int index = Int32.Parse(prizes[0]);
-        if (icons.Length > index)
-        {
-            icon.gameObject.SetActive(true);
-            icon.sprite = icons[index];
-        }
+        var adjustedTime = _timeTillNextPrize + 1;
+        float minutes = Mathf.FloorToInt(adjustedTime / 60);
+        float seconds = Mathf.FloorToInt(adjustedTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void HidePrizeAndTimer()
+    {
+        _isActive = false;
+        
+        _hasPrize = false;
+        
+        prizeIconImage.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
+    }
+
+    public void SetPrize()
+    {
+        _isActive = true;
+        
+        _hasPrize = true;
+
+        prizeIconImage.gameObject.SetActive(true);
+        timerText.gameObject.SetActive(false);
+    }
+
+    public void SetCooldown(float timeTillNextPrize)
+    {
+        _isActive = true;
+        
+        _hasPrize = false;
+
+        prizeIconImage.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(true);
+
+        _timeTillNextPrize = timeTillNextPrize;
     }
 }
