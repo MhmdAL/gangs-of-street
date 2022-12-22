@@ -2013,6 +2013,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32ef2d8dbe8f07c4a9ca0fe9bbec78c6, type: 3}
+--- !u!1 &189838875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3461045396106595038, guid: 32ef2d8dbe8f07c4a9ca0fe9bbec78c6, type: 3}
+  m_PrefabInstance: {fileID: 189838874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190761411
 GameObject:
   m_ObjectHideFlags: 0
@@ -4844,6 +4849,10 @@ PrefabInstance:
       propertyPath: referenceCamera
       value: 
       objectReference: {fileID: 1568992422}
+    - target: {fileID: 6614788512626867249, guid: 89adf07946a522d4a84a04a45840d6e3, type: 3}
+      propertyPath: minForwardDistanceFromFocusTarget
+      value: 9.96
+      objectReference: {fileID: 0}
     - target: {fileID: 6614788512626867249, guid: 89adf07946a522d4a84a04a45840d6e3, type: 3}
       propertyPath: axes.values.Array.data[2].IsOverriden
       value: 0
@@ -14623,12 +14632,25 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6684420943652098350, guid: 32ef2d8dbe8f07c4a9ca0fe9bbec78c6, type: 3}
   m_PrefabInstance: {fileID: 189838874}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 189838875}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9a056ee5a7a7e04cba316807be4a7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1554294598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189838875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09, y: 2.22, z: 2.46348}
+  m_Center: {x: -0.000000029802322, y: 0, z: 2.86}
 --- !u!1 &1556845097
 GameObject:
   m_ObjectHideFlags: 0
@@ -15797,8 +15819,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ConstantMin: 10
-    m_ConstantMax: 20
+    m_ConstantMin: 15
+    m_ConstantMax: 25
   planeAltitude:
     m_Mode: 3
     m_CurveMultiplier: 0
